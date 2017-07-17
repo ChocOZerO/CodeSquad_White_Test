@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 /**
  * Created by Taehyeon Jake LEE on 2017-07-17.
@@ -34,13 +35,47 @@ public class Baseball {
         2중 반복문을 1중 반복문 2개로 나누어 처리하는 방법은 없는지 고려해 본다.
         */
         ArrayList<Integer> computer = new ArrayList<Integer>();
-        while (computer.size() != 3) {
+        while (computer.size() < 3) {
             int newNum = (int)(Math.random() * 9) + 1;
             if (!computer.contains(newNum)) {
                 computer.add(newNum);
             }
         }
         Collections.shuffle(computer);
-        System.out.println(computer);
+
+        System.out.println("숫자야구게임");
+        int strikeCount = 0;
+        int ballCount;
+        Scanner sc = new Scanner(System.in);
+        while (strikeCount != 3) {
+            System.out.println("1부터 9사이의 숫자로 이루어진 세자리 숫자를 입력해주세요.");
+            String strGuessNum = sc.nextLine();
+            if (strGuessNum.length() != 3) {
+                continue;
+            }
+            String[] guessNum = strGuessNum.split("");
+            strikeCount = 0;
+            ballCount = 0;
+            for (int i = 0; i < guessNum.length; i++) {
+                int num = Integer.parseInt(guessNum[i]);
+                if (num == computer.get(i)) {
+                    strikeCount += 1;
+                } else if (computer.contains(num)) {
+                    ballCount += 1;
+                }
+            }
+            String result = "";
+            if (strikeCount > 0) {
+                result += strikeCount + " 스트라이크 ";
+            }
+            if (ballCount > 0) {
+                result += ballCount + " 볼";
+            }
+            if (strikeCount == 0 && ballCount == 0) {
+                result += "낫싱";
+            }
+            System.out.println(result);
+        }
+        System.out.println("성공! 축하드립니다!");
     }
 }
