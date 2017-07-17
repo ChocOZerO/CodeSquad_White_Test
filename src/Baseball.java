@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * Created by Taehyeon Jake LEE on 2017-07-17.
  */
@@ -30,6 +33,14 @@ public class Baseball {
         반복문을 2중(반복문 안의 반복문)으로 사용하면 한번에 고려할 부분이 많다.
         2중 반복문을 1중 반복문 2개로 나누어 처리하는 방법은 없는지 고려해 본다.
         */
-        
+        ArrayList<Integer> computer = new ArrayList<Integer>();
+        while (computer.size() != 3) {
+            int newNum = (int)(Math.random() * 9) + 1;
+            if (!computer.contains(newNum)) {
+                computer.add(newNum);
+            }
+        }
+        Collections.shuffle(computer);
+        System.out.println(computer);
     }
 }
