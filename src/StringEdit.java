@@ -48,6 +48,7 @@ public class StringEdit {
         String[] words = inSentence.split(" ");
         String outSentence = "";
         int totalCount = 0;
+        HashMap<Character, Integer> alphabetCountMap = new HashMap<Character, Integer>();
         for (int i = words.length - 1; i >= 0 ; i--) {
             if (i != words.length - 1) {
                 outSentence += " ";
@@ -55,10 +56,33 @@ public class StringEdit {
             outSentence += words[i];
             for (int j = 0; j < words[i].length(); j++) {
                 totalCount += 1;
+                char alphabet = words[i].charAt(j);
+                if (alphabetCountMap.containsKey(alphabet)) {
+                    alphabetCountMap.put(alphabet, alphabetCountMap.get(alphabet)+1);
+                } else {
+                    alphabetCountMap.put(alphabet, 1);
+                }
             }
         }
-
+        System.out.println("\n출력:");
         System.out.println(outSentence+lastSign);
         System.out.println("전체 수 : " + totalCount);
+
+        while (alphabetCountMap.size() != 0) {
+            int maxCount = 0;
+            char maxAlphabet = '?';
+            for (Character alphabetKey : alphabetCountMap.keySet()) {
+                int alphabetCount = alphabetCountMap.get(alphabetKey);
+                if (maxCount < alphabetCount) {
+                    maxCount = alphabetCount;
+                    maxAlphabet = alphabetKey;
+                }
+            }
+            System.out.println(String.valueOf(maxAlphabet) + ": " + alphabetCountMap.get(maxAlphabet));
+            alphabetCountMap.remove(maxAlphabet);
+        }
+
+
+
     }
 }
