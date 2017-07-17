@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Scanner;
+
 /**
  * Created by Taehyeon Jake LEE on 2017-07-17.
  */
@@ -29,8 +32,33 @@ public class StringEdit {
         String의 split() 메소드를 활용해 공백 문자 기준으로 문자열을 분리할 수 있다.
         String의 length() 메소드를 통해 문자열의 길이를 구할 수 있다.
         */
+        System.out.println("입력:");
+        Scanner sc = new Scanner(System.in);
 
+        String inSentence = sc.nextLine();
+        int sentenceLen = inSentence.length();
 
+        String lastSign = String.valueOf(inSentence.charAt(sentenceLen-1));
+        if (!lastSign.matches("[0-9|a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힝]")) {
+            inSentence = inSentence.substring(0, sentenceLen-1);
+        } else {
+            lastSign = "";
+        }
 
+        String[] words = inSentence.split(" ");
+        String outSentence = "";
+        int totalCount = 0;
+        for (int i = words.length - 1; i >= 0 ; i--) {
+            if (i != words.length - 1) {
+                outSentence += " ";
+            }
+            outSentence += words[i];
+            for (int j = 0; j < words[i].length(); j++) {
+                totalCount += 1;
+            }
+        }
+
+        System.out.println(outSentence+lastSign);
+        System.out.println("전체 수 : " + totalCount);
     }
 }
